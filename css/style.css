@@ -169,7 +169,15 @@ img{ max-width: 100%; display: block; }
   position: relative;
   height: 46vh;
   min-height: 640px;
-  max-height: 760px;
+  max-height: 1060px;
+  overflow: hidden;
+  background: var(--ink);
+}
+.parallax-band-small{
+  position: relative;
+  height: 46vh;
+  min-height: 280px;
+  max-height: 360px;
   overflow: hidden;
   background: var(--ink);
 }
