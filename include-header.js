@@ -31,11 +31,11 @@ console.log('Current page:', currentPage); // Debugging line
 
     // Map filenames to data-page attributes
     const pageMap = {
-      'index.html': 'home',
-      'about.html': 'about',
-      'services.html': 'services',
-      'faq.html': 'faq',
-      'contact.html': 'contact'
+      'index': 'home',
+      'about': 'about',
+      'services': 'services',
+      'faq': 'faq',
+      'contact': 'contact'
     };
 
     // Get the data-page value for the current page
