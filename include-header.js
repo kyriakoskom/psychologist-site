@@ -27,6 +27,8 @@ async function includeHeader() {
     // Get the current page's filename (e.g., "faq.html")
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 
+console.log('Current page:', currentPage); // Debugging line
+
     // Map filenames to data-page attributes
     const pageMap = {
       'index.html': 'home',
@@ -38,6 +40,8 @@ async function includeHeader() {
 
     // Get the data-page value for the current page
     const currentDataPage = pageMap[currentPage] || 'home';
+
+console.log('Current data-page:', currentDataPage); // Debugging line
 
     // Find the link with the matching data-page and add the 'active' class
     const navLinks = document.querySelectorAll('a[data-page]');
