@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Συχνές Ερωτήσεις — Όνομα Επίθετο, Ψυχολόγος</title>
+<meta name="description" content="Όλες οι απαντήσεις για ραντεβού, θεραπευτική διαδικασία, απόρρητο, κόστος και online συνεδρίες.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Poppins:wght@300;400;500;600&display=swap&subset=greek" rel="stylesheet">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="stylesheet" href="css/style.css">
+<script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Μετάβαση στο περιεχόμενο</a>
+
+<header class="site-header" id="site-header">
+  <div class="wrap header-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <img src="assets/logo.svg" alt="" width="34" height="34">
+      </span>
+      <span class="brand-text">
+        <span class="brand-name">Όνομα Επίθετο</span>
+        <span class="brand-sub">Ψυχολόγος</span>
+      </span>
+    </a>
+
+    <nav class="main-nav" id="main-nav" aria-label="Κύρια πλοήγηση">
+      <a href="index.html">Αρχική</a>
+      <a href="index.html#about">Η ψυχολόγος</a>
+      <a href="index.html#services">Υπηρεσίες</a>
+      <a href="faq.html" class="active">Συχνές Ερωτήσεις</a>
+      <a href="index.html#contact">Επικοινωνία / Ραντεβού</a>
+    </nav>
+
+    <a href="index.html#contact" class="btn btn-primary header-cta">Κλείστε Ραντεβού</a>
+
+    <button class="menu-toggle" id="menu-toggle" aria-label="Άνοιγμα μενού" aria-expanded="false" aria-controls="main-nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- PAGE INTRO -->
+  <!-- <section class="page-intro">
+    <div class="wrap">
+      <p class="eyebrow reveal">Επικοινωνία</p>
+      <h1 class="reveal">Ό,τι χρειάζεται να ξέρετε πριν το πρώτο ραντεβού</h1>
+      <p class="page-intro-lede reveal">Αν η απάντηση που ψάχνετε δεν βρίσκεται εδώ, στείλτε μας ένα μήνυμα από τη <a href="index.html#contact">φόρμα επικοινωνίας</a> — θα χαρούμε να σας απαντήσουμε προσωπικά.</p>
+    </div>
+  </section> -->
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="wrap contact-grid">
+      <div class="contact-copy reveal">
+        <p class="eyebrow">Επικοινωνία</p>
+        <h2>Κλείστε το ραντεβού σας</h2>
+        <p>Στείλτε μας λίγα λόγια για το τι σας απασχολεί και θα επικοινωνήσουμε μαζί σας το συντομότερο.</p>
+      </div>
+
+      <!--
+        FORMSPREE SETUP (free tier, no backend needed):
+        1. Create a free account at https://formspree.io
+        2. Create a form, copy the endpoint (https://formspree.io/f/xxxxabcd)
+        3. Replace YOUR_FORM_ID below with your real ID.
+      -->
+      <form class="contact-form reveal" id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+        <div class="form-row">
+          <label for="name">Ονοματεπώνυμο</label>
+          <input type="text" id="name" name="name" required autocomplete="name">
+        </div>
+        <div class="form-row form-row-split">
+          <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required autocomplete="email">
+          </div>
+          <div>
+            <label for="phone">Τηλέφωνο (προαιρετικό)</label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel">
+          </div>
+        </div>
+        <div class="form-row">
+          <label for="topic">Μήνυμα</label>
+          <textarea id="topic" name="topic" rows="4" required></textarea>
+        </div>
+        <div class="form-row form-row-check">
+          <input type="checkbox" id="consent" name="consent" required>
+          <label for="consent">Συναινώ στην επεξεργασία των στοιχείων μου αποκλειστικά για την οργάνωση του ραντεβού.</label>
+        </div>
+        <input type="hidden" name="_subject" value="Νέο μήνυμα από τη φόρμα επικοινωνίας">
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+        <button type="submit" class="btn btn-primary btn-block">Αποστολή μηνύματος</button>
+        <p class="form-note" id="form-note" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- BANNER CTA -->
+  <!-- <section class="banner">
+    <div class="wrap banner-inner reveal">
+      <div class="banner-copy">
+        <span class="banner-icon" aria-hidden="true">
+          <svg viewBox="0 0 40 40"><rect x="6" y="9" width="28" height="24" rx="3"/><path d="M6 16h28"/><path d="M13 6v6M27 6v6"/><path d="M13 22h4M13 27h8"/></svg>
+        </span>
+        <div>
+          <h2>Δεν βρήκατε την απάντηση που ψάχνατε;</h2>
+          <p>Γράψτε μας και θα σας απαντήσουμε προσωπικά, το συντομότερο δυνατό.</p>
+        </div>
+      </div>
+      <a href="index.html#contact" class="btn btn-banner">Επικοινωνία</a>
+    </div>
+  </section> -->
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <a href="index.html" class="footer-brand">
+      <span class="brand-mark" aria-hidden="true">
+        <img src="assets/logo.svg" alt="" width="30" height="30">
+      </span>
+      <span class="brand-text">
+        <span class="brand-name">Όνομα Επίθετο</span>
+        <span class="brand-sub">Ψυχολόγος</span>
+      </span>
+    </a>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Μενού</h4>
+        <a href="index.html">Αρχική</a>
+        <a href="index.html#about">Η ψυχολόγος</a>
+        <a href="index.html#services">Υπηρεσίες</a>
+        <a href="faq.html">Συχνές Ερωτήσεις</a>
+        <a href="index.html#contact">Επικοινωνία / Ραντεβού</a>
+      </div>
+      <div class="footer-col">
+        <h4>Επικοινωνία</h4>
+        <a href="tel:+302101234567"><svg viewBox="0 0 24 24" class="fi"><path d="M6 4c-1.5 0-2 1-2 2 0 8 6 14 14 14 1 0 2-.5 2-2v-2.5l-4-1.5-1.5 1.5c-2-.8-3.7-2.5-4.5-4.5L11.5 9.5 10 5.5 8 4.5 6 4Z"/></svg>210 1234567</a>
+        <a href="mailto:info@onomapsychologos.gr"><svg viewBox="0 0 24 24" class="fi"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 6 8 6 8-6"/></svg>info@onomapsychologos.gr</a>
+        <span><svg viewBox="0 0 24 24" class="fi"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg>Αθήνα, Ελλάδα</span>
+      </div>
+      <div class="footer-col">
+        <h4>Ακολουθήστε με</h4>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 9h3V6h-3c-2 0-3.5 1.5-3.5 3.5V11H8v3h2.5v6h3v-6H16l.5-3h-3V9.5c0-.3.2-.5.5-.5Z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Νομικά</h4>
+        <a href="#">Πολιτική Απορρήτου</a>
+        <a href="#">Πολιτική Cookies</a>
+      </div>
+    </div>
+    <p class="footer-legal">&copy; <span id="year"></span> Όνομα Επίθετο &ndash; Ψυχολόγος. Με την επιφύλαξη παντός δικαιώματος.</p>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
