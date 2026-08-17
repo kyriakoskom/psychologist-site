@@ -316,6 +316,38 @@ img{ max-width: 100%; display: block; }
 @media (max-width: 900px){ .faq-grid{ grid-template-columns: 1fr; } }
 
 /* =========================================================
+   Bio page — image floated left, text wraps around it
+   ========================================================= */
+ 
+.bio-content{ padding: 60px 0 100px; }
+.bio-content h1{ margin-bottom: 0.6em; }
+ 
+.bio-portrait{
+  float: left;
+  width: 320px;
+  max-width: 42%;
+  height: auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin: 4px 32px 20px 0;
+}
+ 
+/* keeps line length readable instead of stretching to the
+   full 1180px .wrap width once text clears the floated image */
+.bio-content p{ max-width: 150ch; text-align: justify; }
+.bio-content h3{ clear: left; margin-top: 1.4em; font-size: 1.5rem; }
+
+@media (max-width: 700px){
+  .bio-portrait{
+    float: none;
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto 28px;
+  }
+}
+
+/* =========================================================
    Contact
    ========================================================= */
 
