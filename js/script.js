@@ -6,71 +6,6 @@
     reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   } catch (e) { /* matchMedia unsupported — proceed with animations on */ }
 
-  /* ---------- footer year ---------- */
-  var yearEl = document.getElementById("year");
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-  /* ---------- hide header on scroll down, show on scroll up ---------- */
-  var siteHeader = document.getElementById("site-header");
-  if (siteHeader) {
-    var lastScrollY = window.scrollY || window.pageYOffset;
-    var ticking = false;
-    var revealThreshold = 12; // px of scroll movement before reacting, avoids jitter
-
-    var onScrollHeader = function () {
-      var currentY = window.scrollY || window.pageYOffset;
-      var delta = currentY - lastScrollY;
-
-      // keep header visible near the very top, regardless of direction
-      if (currentY < 100) {
-        siteHeader.classList.remove("header-hidden");
-      } else if (delta > revealThreshold) {
-        // scrolling down
-        siteHeader.classList.add("header-hidden");
-        // also close the mobile menu if it was open, so it can't hide off-screen while open
-        if (mainNav && mainNav.classList.contains("open")) {
-          mainNav.classList.remove("open");
-          if (menuToggle) {
-            menuToggle.classList.remove("open");
-            menuToggle.setAttribute("aria-expanded", "false");
-          }
-        }
-      } else if (delta < -revealThreshold) {
-        // scrolling up
-        siteHeader.classList.remove("header-hidden");
-      }
-
-      lastScrollY = currentY;
-      ticking = false;
-    };
-
-    window.addEventListener("scroll", function () {
-      if (!ticking) {
-        window.requestAnimationFrame(onScrollHeader);
-        ticking = true;
-      }
-    }, { passive: true });
-  }
-
-  /* ---------- mobile menu ---------- */
-  var menuToggle = document.getElementById("menu-toggle");
-  var mainNav = document.getElementById("main-nav");
-  if (menuToggle && mainNav) {
-    menuToggle.addEventListener("click", function () {
-      var isOpen = mainNav.classList.toggle("open");
-      menuToggle.classList.toggle("open", isOpen);
-      menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-      menuToggle.setAttribute("aria-label", isOpen ? "Κλείσιμο μενού" : "Άνοιγμα μενού");
-    });
-    mainNav.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", function () {
-        mainNav.classList.remove("open");
-        menuToggle.classList.remove("open");
-        menuToggle.setAttribute("aria-expanded", "false");
-      });
-    });
-  }
-
   /* ---------- reveal on scroll ---------- */
   var revealEls = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window && !reduceMotion) {
@@ -167,4 +102,82 @@
         });
     });
   }
+
+  /* =========================================================
+     Everything below touches elements that live INSIDE the
+     injected header.html / footer.html. Those are fetched
+     asynchronously (see include-header.js / include-footer.js),
+     so this part waits for both to finish before it runs —
+     otherwise getElementById would just return null.
+     ========================================================= */
+  var headerReady = window.headerReady || Promise.resolve();
+  var footerReady = window.footerReady || Promise.resolve();
+
+  Promise.all([headerReady, footerReady]).then(function () {
+    /* ---------- footer year ---------- */
+    var yearEl = document.getElementById("year");
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    /* ---------- mobile menu ---------- */
+    var menuToggle = document.getElementById("menu-toggle");
+    var mainNav = document.getElementById("main-nav");
+    if (menuToggle && mainNav) {
+      menuToggle.addEventListener("click", function () {
+        var isOpen = mainNav.classList.toggle("open");
+        menuToggle.classList.toggle("open", isOpen);
+        menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        menuToggle.setAttribute("aria-label", isOpen ? "Κλείσιμο μενού" : "Άνοιγμα μενού");
+      });
+      mainNav.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () {
+          mainNav.classList.remove("open");
+          menuToggle.classList.remove("open");
+          menuToggle.setAttribute("aria-expanded", "false");
+        });
+      });
+    }
+
+    /* ---------- hide header on scroll down, show on scroll up ---------- */
+    var siteHeader = document.getElementById("site-header");
+    if (siteHeader) {
+      var lastScrollY = window.scrollY || window.pageYOffset;
+      var ticking = false;
+      var revealThreshold = 12; // px of scroll movement before reacting, avoids jitter
+
+      var onScrollHeader = function () {
+        var currentY = window.scrollY || window.pageYOffset;
+        var delta = currentY - lastScrollY;
+
+        // keep header visible near the very top, regardless of direction
+        if (currentY < 100) {
+          siteHeader.classList.remove("header-hidden");
+        } else if (delta > revealThreshold) {
+          // scrolling down
+          siteHeader.classList.add("header-hidden");
+          // also close the mobile menu if it was open, so it can't hide off-screen while open
+          if (mainNav && mainNav.classList.contains("open")) {
+            mainNav.classList.remove("open");
+            if (menuToggle) {
+              menuToggle.classList.remove("open");
+              menuToggle.setAttribute("aria-expanded", "false");
+            }
+          }
+        } else if (delta < -revealThreshold) {
+          // scrolling up
+          siteHeader.classList.remove("header-hidden");
+        }
+
+        lastScrollY = currentY;
+        ticking = false;
+      };
+
+      window.addEventListener("scroll", function () {
+        if (!ticking) {
+          window.requestAnimationFrame(onScrollHeader);
+          ticking = true;
+        }
+      }, { passive: true });
+    }
+  });
 })();
+

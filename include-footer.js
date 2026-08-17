@@ -1,5 +1,5 @@
 // include-footer.js
-async function includeFooter() {
+window.footerReady = (async function includeFooter() {
   try {
     const response = await fetch('footer.html');
     if (!response.ok) {
@@ -10,7 +10,4 @@ async function includeFooter() {
   } catch (error) {
     console.error('Error loading footer:', error);
   }
-}
-
-// Call the function when the page loads
-window.addEventListener('DOMContentLoaded', includeFooter);
+})();

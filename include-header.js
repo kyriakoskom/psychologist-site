@@ -1,21 +1,5 @@
-// // include-header.js
-// async function includeHeader() {
-//   try {
-//     const response = await fetch('header.html');
-//     if (!response.ok) {
-//       throw new Error('Failed to fetch header.html');
-//     }
-//     const headerContent = await response.text();
-//     document.getElementById('header').innerHTML = headerContent;
-//   } catch (error) {
-//     console.error('Error loading header:', error);
-//   }
-// }
-
-// // Call the function when the page loads
-// window.addEventListener('DOMContentLoaded', includeHeader);
 // include-header.js
-async function includeHeader() {
+window.headerReady = (async function includeHeader() {
   try {
     const response = await fetch('header.html');
     if (!response.ok) {
@@ -24,28 +8,25 @@ async function includeHeader() {
     const headerContent = await response.text();
     document.getElementById('header').innerHTML = headerContent;
 
-    // Get the current page's filename (e.g., "faq.html")
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-
-console.log('Current page:', currentPage); // Debugging line
+    // Work out which page we're on — handles "/", "/contact",
+    // "/contact.html" and "/contact/" all the same way.
+    let path = window.location.pathname;
+    if (path.endsWith('/')) path = path.slice(0, -1);
+    let currentPage = (path.split('/').pop() || 'index').replace(/\.html$/, '');
+    if (currentPage === '') currentPage = 'index';
 
     // Map filenames to data-page attributes
     const pageMap = {
-      'index': 'home',
-      'about': 'about',
-      'services': 'services',
-      'faq': 'faq',
-      'contact': 'contact'
+      index: 'home',
+      about: 'about',
+      services: 'services',
+      faq: 'faq',
+      contact: 'contact'
     };
-
-    // Get the data-page value for the current page
     const currentDataPage = pageMap[currentPage] || 'home';
 
-console.log('Current data-page:', currentDataPage); // Debugging line
-
     // Find the link with the matching data-page and add the 'active' class
-    const navLinks = document.querySelectorAll('a[data-page]');
-    navLinks.forEach(link => {
+    document.querySelectorAll('a[data-page]').forEach(function (link) {
       if (link.getAttribute('data-page') === currentDataPage) {
         link.classList.add('active');
       }
@@ -53,7 +34,4 @@ console.log('Current data-page:', currentDataPage); // Debugging line
   } catch (error) {
     console.error('Error loading header:', error);
   }
-}
-
-// Call the function when the DOM is loaded
-window.addEventListener('DOMContentLoaded', includeHeader);
+})();
