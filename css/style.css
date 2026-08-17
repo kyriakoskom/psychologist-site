@@ -168,7 +168,7 @@ img{ max-width: 100%; display: block; }
 
 .parallax-band{
   position: relative;
-  height: 46vh;
+  height: 76vh;
   min-height: 640px;
   max-height: 1060px;
   overflow: hidden;
