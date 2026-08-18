@@ -185,53 +185,34 @@
       var lastScrollY = window.scrollY || window.pageYOffset;
       var ticking = false;
 
-      var onScrollHeader = function () {
+      function updateHeader() {
         var currentY = window.scrollY || window.pageYOffset;
-        var delta = currentY - lastScrollY;
 
-        /*
-        * Always show the header near the top.
-        */
+        // Always show near the top
         if (currentY <= 80) {
           siteHeader.classList.remove("header-hidden");
+          lastScrollY = currentY;
+          ticking = false;
+          return;
         }
 
-        /*
-        * Scrolling DOWN:
-        * hide the header.
-        */
-        else if (delta > 0) {
+        // Scrolling down
+        if (currentY > lastScrollY) {
           siteHeader.classList.add("header-hidden");
-
-          // Close mobile menu when scrolling down
-          if (mainNav && mainNav.classList.contains("open")) {
-            mainNav.classList.remove("open");
-
-            if (menuToggle) {
-              menuToggle.classList.remove("open");
-              menuToggle.setAttribute("aria-expanded", "false");
-              menuToggle.setAttribute("aria-label", "Άνοιγμα μενού");
-            }
-          }
         }
 
-        /*
-        * Scrolling UP:
-        * show the header immediately.
-        *
-        * The CSS transition handles the smooth animation.
-        */
-        else if (delta < 0) {
+        // Scrolling up
+        else if (currentY < lastScrollY) {
           siteHeader.classList.remove("header-hidden");
         }
 
         lastScrollY = currentY;
         ticking = false;
-      };
+      }
 
       window.addEventListener("scroll", function () {
         if (!ticking) {
-          window.requestAnimationFrame(onScrollHeader);
+          window.requestAnimationFrame(updateHeader);
           ticking = true;
         }
       }, { passive: true });
