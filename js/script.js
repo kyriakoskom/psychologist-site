@@ -138,32 +138,90 @@
     }
 
     /* ---------- hide header on scroll down, show on scroll up ---------- */
+    // var siteHeader = document.getElementById("site-header");
+    // if (siteHeader) {
+    //   var lastScrollY = window.scrollY || window.pageYOffset;
+    //   var ticking = false;
+    //   var revealThreshold = 12; // px of scroll movement before reacting, avoids jitter
+
+    //   var onScrollHeader = function () {
+    //     var currentY = window.scrollY || window.pageYOffset;
+    //     var delta = currentY - lastScrollY;
+
+    //     // keep header visible near the very top, regardless of direction
+    //     if (currentY < 100) {
+    //       siteHeader.classList.remove("header-hidden");
+    //     } else if (delta > revealThreshold) {
+    //       // scrolling down
+    //       siteHeader.classList.add("header-hidden");
+    //       // also close the mobile menu if it was open, so it can't hide off-screen while open
+    //       if (mainNav && mainNav.classList.contains("open")) {
+    //         mainNav.classList.remove("open");
+    //         if (menuToggle) {
+    //           menuToggle.classList.remove("open");
+    //           menuToggle.setAttribute("aria-expanded", "false");
+    //         }
+    //       }
+    //     } else if (delta < -revealThreshold) {
+    //       // scrolling up
+    //       siteHeader.classList.remove("header-hidden");
+    //     }
+
+    //     lastScrollY = currentY;
+    //     ticking = false;
+    //   };
+
+    //   window.addEventListener("scroll", function () {
+    //     if (!ticking) {
+    //       window.requestAnimationFrame(onScrollHeader);
+    //       ticking = true;
+    //     }
+    //   }, { passive: true });
+    // }
+    /* ---------- hide header on scroll down, show on scroll up ---------- */
     var siteHeader = document.getElementById("site-header");
+
     if (siteHeader) {
       var lastScrollY = window.scrollY || window.pageYOffset;
       var ticking = false;
-      var revealThreshold = 12; // px of scroll movement before reacting, avoids jitter
 
       var onScrollHeader = function () {
         var currentY = window.scrollY || window.pageYOffset;
         var delta = currentY - lastScrollY;
 
-        // keep header visible near the very top, regardless of direction
-        if (currentY < 100) {
+        /*
+        * Always show the header near the top.
+        */
+        if (currentY <= 80) {
           siteHeader.classList.remove("header-hidden");
-        } else if (delta > revealThreshold) {
-          // scrolling down
+        }
+
+        /*
+        * Scrolling DOWN:
+        * hide the header.
+        */
+        else if (delta > 0) {
           siteHeader.classList.add("header-hidden");
-          // also close the mobile menu if it was open, so it can't hide off-screen while open
+
+          // Close mobile menu when scrolling down
           if (mainNav && mainNav.classList.contains("open")) {
             mainNav.classList.remove("open");
+
             if (menuToggle) {
               menuToggle.classList.remove("open");
               menuToggle.setAttribute("aria-expanded", "false");
+              menuToggle.setAttribute("aria-label", "Άνοιγμα μενού");
             }
           }
-        } else if (delta < -revealThreshold) {
-          // scrolling up
+        }
+
+        /*
+        * Scrolling UP:
+        * show the header immediately.
+        *
+        * The CSS transition handles the smooth animation.
+        */
+        else if (delta < 0) {
           siteHeader.classList.remove("header-hidden");
         }
 

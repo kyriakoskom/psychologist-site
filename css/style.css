@@ -105,8 +105,18 @@ img{ max-width: 100%; display: block; }
 }
 .header-inner{ display: flex; align-items: center; justify-content: space-between; height: 88px; gap: 24px; }
 
-.site-header{ transform: translateY(0); transition: transform 0.35s ease; }
-.site-header.header-hidden{ transform: translateY(-100%); }
+.site-header{
+  transform: translateY(0);
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+.site-header.header-hidden{
+  transform: translateY(-100%);
+  box-shadow: none;
+}
 
 .brand{ display: flex; align-items: center; gap: 12px; }
 .brand-mark{ width: 30px; height: 30px; color: var(--olive); flex: none; }
