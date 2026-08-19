@@ -121,7 +121,7 @@ img{ max-width: 100%; display: block; }
   will-change: transform;
 }
 
-.site-header.header-hidden{
+.header-hidden{
   transform: translateY(-100%);
 }
 
