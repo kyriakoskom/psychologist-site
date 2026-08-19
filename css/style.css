@@ -391,7 +391,7 @@ img{ max-width: 100%; display: block; }
    Bio page — image floated left, text wraps around it
    ========================================================= */
  
-.bio-content{ padding: 60px 0 100px; }
+.bio-content{ padding: 60px 0 0px; }
 .bio-content h1{ margin-bottom: 0.6em; }
  
 .bio-portrait{
