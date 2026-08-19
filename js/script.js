@@ -138,71 +138,24 @@
     }
 
     /* ---------- hide header on scroll down, show on scroll up ---------- */
-    // var siteHeader = document.getElementById("site-header");
-    // if (siteHeader) {
-    //   var lastScrollY = window.scrollY || window.pageYOffset;
-    //   var ticking = false;
-    //   var revealThreshold = 12; // px of scroll movement before reacting, avoids jitter
-
-    //   var onScrollHeader = function () {
-    //     var currentY = window.scrollY || window.pageYOffset;
-    //     var delta = currentY - lastScrollY;
-
-    //     // keep header visible near the very top, regardless of direction
-    //     if (currentY < 100) {
-    //       siteHeader.classList.remove("header-hidden");
-    //     } else if (delta > revealThreshold) {
-    //       // scrolling down
-    //       siteHeader.classList.add("header-hidden");
-    //       // also close the mobile menu if it was open, so it can't hide off-screen while open
-    //       if (mainNav && mainNav.classList.contains("open")) {
-    //         mainNav.classList.remove("open");
-    //         if (menuToggle) {
-    //           menuToggle.classList.remove("open");
-    //           menuToggle.setAttribute("aria-expanded", "false");
-    //         }
-    //       }
-    //     } else if (delta < -revealThreshold) {
-    //       // scrolling up
-    //       siteHeader.classList.remove("header-hidden");
-    //     }
-
-    //     lastScrollY = currentY;
-    //     ticking = false;
-    //   };
-
-    //   window.addEventListener("scroll", function () {
-    //     if (!ticking) {
-    //       window.requestAnimationFrame(onScrollHeader);
-    //       ticking = true;
-    //     }
-    //   }, { passive: true });
-    // }
-    /* ---------- hide header on scroll down, show on scroll up ---------- */
     var siteHeader = document.getElementById("site-header");
-
+    console.log("siteHeader:", siteHeader);
     if (siteHeader) {
+      console.log("siteHeader found, adding scroll listener");
       var lastScrollY = window.scrollY || window.pageYOffset;
       var ticking = false;
+      var THRESHOLD = 4; // px of movement needed before reacting — kills jitter
 
       function updateHeader() {
+        console.log("updateHeader called");
         var currentY = window.scrollY || window.pageYOffset;
-
-        // Always show near the top
+        var delta = currentY - lastScrollY;
+        console.log("currentY:", currentY, "lastScrollY:", lastScrollY, "delta:", delta);
         if (currentY <= 80) {
           siteHeader.classList.remove("header-hidden");
-          lastScrollY = currentY;
-          ticking = false;
-          return;
-        }
-
-        // Scrolling down
-        if (currentY > lastScrollY) {
+        } else if (delta > THRESHOLD) {
           siteHeader.classList.add("header-hidden");
-        }
-
-        // Scrolling up
-        else if (currentY < lastScrollY) {
+        } else if (delta < -THRESHOLD) {
           siteHeader.classList.remove("header-hidden");
         }
 
@@ -212,6 +165,7 @@
 
       window.addEventListener("scroll", function () {
         if (!ticking) {
+          console.log("scroll event, requesting animation frame");
           window.requestAnimationFrame(updateHeader);
           ticking = true;
         }
