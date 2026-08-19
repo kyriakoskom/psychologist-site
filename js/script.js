@@ -141,21 +141,21 @@
     var siteHeader = document.getElementById("site-header");
     console.log("siteHeader:", siteHeader);
     if (siteHeader) {
-      console.log("siteHeader found, adding scroll listener");
       var lastScrollY = window.scrollY || window.pageYOffset;
       var ticking = false;
       var THRESHOLD = 4; // px of movement needed before reacting — kills jitter
 
       function updateHeader() {
-        console.log("updateHeader called");
         var currentY = window.scrollY || window.pageYOffset;
         var delta = currentY - lastScrollY;
-        console.log("currentY:", currentY, "lastScrollY:", lastScrollY, "delta:", delta);
         if (currentY <= 80) {
+          console.log("near top, showing header");
           siteHeader.classList.remove("header-hidden");
         } else if (delta > THRESHOLD) {
+          console.log("scroll down, hiding header");
           siteHeader.classList.add("header-hidden");
         } else if (delta < -THRESHOLD) {
+          console.log("scroll up, showing header");
           siteHeader.classList.remove("header-hidden");
         }
 

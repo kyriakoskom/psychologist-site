@@ -7,7 +7,7 @@ window.headerReady = (async function includeHeader() {
     }
     const headerContent = await response.text();
     document.getElementById('header').innerHTML = headerContent;
-
+console.log('Header content injected successfully.' + headerContent);
     // Work out which page we're on — handles "/", "/contact",
     // "/contact.html" and "/contact/" all the same way.
     let path = window.location.pathname;
