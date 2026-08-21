@@ -6,7 +6,7 @@ window.headerReady = (async function includeHeader() {
       throw new Error('Failed to fetch header.html');
     }
     const headerContent = await response.text();
-    document.getElementById('header').innerHTML = headerContent;
+    document.getElementById('site-header').innerHTML = headerContent;
 console.log('Header content injected successfully.' + headerContent);
     // Work out which page we're on — handles "/", "/contact",
     // "/contact.html" and "/contact/" all the same way.

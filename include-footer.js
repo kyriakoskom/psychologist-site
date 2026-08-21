@@ -6,7 +6,7 @@ window.footerReady = (async function includeFooter() {
       throw new Error('Failed to fetch footer.html');
     }
     const footerContent = await response.text();
-    document.getElementById('footer').innerHTML = footerContent;
+    document.getElementById('site-footer').innerHTML = footerContent;
   } catch (error) {
     console.error('Error loading footer:', error);
   }
