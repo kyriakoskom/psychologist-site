@@ -118,9 +118,43 @@
     var yearEl = document.getElementById("year");
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    /* ---------- mobile menu ---------- */
+        /* ---------- mobile menu ---------- */
+    var siteHeader = document.getElementById("site-header");
     var menuToggle = document.getElementById("menu-toggle");
     var mainNav = document.getElementById("main-nav");
+    var headerInner = siteHeader ? siteHeader.querySelector(".header-inner") : null;
+    var headerCta = siteHeader ? siteHeader.querySelector(".header-cta") : null;
+    var mobileQuery = window.matchMedia("(max-width: 980px)");
+
+    // #main-nav is position:fixed on mobile. .site-header uses
+    // backdrop-filter / transform / will-change (for the hide-on-scroll
+    // effect), and each of those turns an element into a "containing
+    // block" for any position:fixed descendant. That meant the nav's
+    // top:88px/bottom:0 were being measured against the header's own
+    // ~88px-tall box instead of the real viewport, collapsing the open
+    // menu down to a single visible row. Moving #main-nav out to be a
+    // sibling of <header> (not a descendant) fixes that. On desktop it's
+    // moved back inside .header-inner so the normal flex row layout
+    // (brand / nav / CTA) is unaffected.
+    function placeNav() {
+      if (!mainNav || !siteHeader) return;
+      if (mobileQuery.matches) {
+        if (mainNav.parentNode !== document.body) {
+          siteHeader.insertAdjacentElement("afterend", mainNav);
+        }
+      } else if (headerInner && headerCta) {
+        if (mainNav.parentNode !== headerInner) {
+          headerInner.insertBefore(mainNav, headerCta);
+        }
+      }
+    }
+    placeNav();
+    if (typeof mobileQuery.addEventListener === "function") {
+      mobileQuery.addEventListener("change", placeNav);
+    } else if (typeof mobileQuery.addListener === "function") {
+      mobileQuery.addListener(placeNav); // Safari < 14 fallback
+    }
+
     if (menuToggle && mainNav) {
       menuToggle.addEventListener("click", function () {
         var isOpen = mainNav.classList.toggle("open");
@@ -138,7 +172,7 @@
     }
 
     /* ---------- hide header on scroll down, show on scroll up ---------- */
-    var siteHeader = document.getElementById("site-header");
+    // var siteHeader = document.getElementById("site-header");
     console.log("siteHeader:", siteHeader);
     if (siteHeader) {
       var lastScrollY = window.scrollY || window.pageYOffset;
