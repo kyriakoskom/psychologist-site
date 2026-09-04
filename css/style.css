@@ -132,14 +132,7 @@ img{ max-width: 100%; display: block; }
 .brand-name{ font-family: var(--font-body); font-weight: 600; font-size: 1rem; color: var(--ink); }
 .brand-sub{ font-size: 0.78rem; color: var(--ink-soft); }
 
-  .main-nav{
-    position: fixed; top: 88px; left: 0; right: 0; bottom: 0; background: var(--paper);
-    flex-direction: column; align-items: flex-start; gap: 0; padding: 10px 32px 40px;
-    transform: translateX(100%); transition: transform 0.35s ease; overflow-y: auto;
-    z-index: 150; /* added — must sit above .site-header (z-index: 100) */
-  }
-
-/* .main-nav{ display: flex; align-items: center; gap: 30px; margin-left: auto; } */
+.main-nav{ display: flex; align-items: center; gap: 30px; margin-left: auto; }
 .main-nav a{ font-size: 0.92rem; color: var(--ink); position: relative; padding: 4px 0; }
 .main-nav a.active{ color: var(--olive); }
 .main-nav a::after{ content: ""; position: absolute; left: 0; right: 100%; bottom: -3px; height: 1.5px; background: var(--rose); transition: right 0.25s ease; }
