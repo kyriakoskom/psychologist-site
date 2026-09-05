@@ -26,12 +26,12 @@
   }
 
   /* ---------- parallax (Rellax.js, if available) ---------- */
-  if (typeof Rellax === "function" && !reduceMotion && document.querySelector(".rellax")) {
+  var isDesktop = window.matchMedia("(min-width: 701px)").matches;
+  if (typeof Rellax === "function" && !reduceMotion && isDesktop && document.querySelector(".rellax")) {
     try {
       new Rellax(".rellax", { center: true });
-    } catch (e) { /* library present but failed to init — fail silently, layout stays static */ }
+    } catch (e) { /* fail silently */ }
   }
-
   /* ---------- FAQ accordion ---------- */
   document.querySelectorAll(".faq-q").forEach(function (btn) {
     btn.addEventListener("click", function () {
